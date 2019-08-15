@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 const lineHeightStandart = 1.428571429;
 
@@ -23,12 +23,10 @@ const GUIDELINE = {
   // Colors
   color_white: '#ffffff',
   color_black: '#000000',
-
   color_light: '#fafafa',
-
   color_text: '#6c7a89',
-
   color_border: '#eff2f5',
+  color_shadow: 'rgba(0, 0, 0, 0.15)',
 
   // Typography
   fontfamily_sans: 'sans-serif',
@@ -43,6 +41,12 @@ const GUIDELINE = {
   // Effects
   transition_duration: '0.2s',
   transition_timingfunction: 'linear',
+
+  // Shadows
+  shadow_offset_x: '0',
+  shadow_offset_y: '2px',
+  shadow_size: '4px',
+  shadow_spread: '-1px',
 }
 
 Object.assign(GUIDELINE, {
@@ -132,6 +136,22 @@ export const GlobalStyle = createGlobalStyle`
   textarea {
     overflow: auto; // Remove the default vertical scrollbar in IE 10+.
   }
+`
+
+export const Container = styled.div`
+  padding-left: ${GUIDELINE.gutter}px;
+  padding-right: ${GUIDELINE.gutter}px;
+`
+
+export const PageHeader = styled.header`
+  background-color: ${GUIDELINE.color_light};
+  padding-top: ${GUIDELINE.gutter}px;
+  padding-bottom: ${GUIDELINE.gutter}px;
+  border-bottom: 1px solid ${GUIDELINE.color_border};
+`
+
+export const PageContent = styled.main`
+  background-color: ${GUIDELINE.color_white};
 `
 
 export default GUIDELINE;
