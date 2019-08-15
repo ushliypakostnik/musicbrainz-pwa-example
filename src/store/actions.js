@@ -1,4 +1,4 @@
-import { FETCH_URL } from './constants';
+import { FETCH_ALBUM_BY_TITLE_URL } from './constants';
 
 // Actions Types
 
@@ -22,15 +22,15 @@ export const requestAlbumFailed = (error) => ({
   error
 });
 
-export const fetchAlbum = (title) => {
+export const fetchAlbumByTitle = (title) => {
   return dispatch => {
     dispatch(requestAlbum());
-    return fetch(FETCH_URL + title + '&fmt=json')
+    return fetch(FETCH_ALBUM_BY_TITLE_URL + title + '&fmt=json')
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result);
-          dispatch(receiveAlbum(result));
+          console.log(result.releases);
+          dispatch(receiveAlbum(result.releases));
         },
         (error) => {
           console.log(error);

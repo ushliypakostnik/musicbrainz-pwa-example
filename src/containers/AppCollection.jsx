@@ -2,8 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { fetchAlbum } from '../store/actions';
-
 import GUIDELINE,
   {
     Container,
@@ -16,9 +14,7 @@ import '../css/input.css';
 import '../css/button.css';
 import '../css/customization.css';
 
-const { Search } = Input;
-
-class App extends Component {
+class AppCollection extends Component {
   render() {
     return (
       <Fragment>
@@ -49,8 +45,4 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchAlbum: (title) => dispatch(fetchAlbum(title)),
-});
-
-export default connect(null, mapDispatchToProps)(App);
+export default AppCollection;

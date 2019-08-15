@@ -10,8 +10,8 @@ import GUIDELINE,
     Container,
   } from '../guideline';
 
-import Search from './Search';
-import Collection from './Collection';
+import AppSearch from './AppSearch';
+import AppCollection from './AppCollection';
 
 const AppWrapper = styled.div`
   min-height: 100vh;
@@ -98,11 +98,11 @@ class App extends Component {
             <Switch>
               <Route
                 path={ PAGES[0].path }
-                component={ Search }
+                component={ AppSearch }
               />
               <Route
                 path={ PAGES[1].path }
-                component={ Collection }
+                component={ AppCollection }
               />
             </Switch>
           </AppPage>

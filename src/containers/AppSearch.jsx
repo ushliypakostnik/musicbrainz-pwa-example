@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { fetchAlbum } from '../store/actions';
+import { fetchAlbumByTitle } from '../store/actions';
 
 import GUIDELINE,
   {
@@ -17,7 +18,19 @@ import '../css/button.css';
 
 const { Search } = Input;
 
-class App extends Component {
+class AppSearch extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      results: [],
+    };
+  }
+
+  static getDerivedStateFromProps = (nextProps, prevState) => ({
+    results: nextProps.results,
+  });
+
   render() {
     return (
       <Fragment>
@@ -27,10 +40,7 @@ class App extends Component {
               placeholder="Search album on Musicbrainz"
               enterButton="Search"
               size="large"
-              onSearch={title => {
-                console.log('Search for album: ', title);
-                this.props.fetchAlbum(title);
-              }}
+              onSearch={title => this.props.fetchAlbumByTitle(title)}
             />
           </Container>
         </PageHeader>
@@ -41,8 +51,16 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchAlbum: (title) => dispatch(fetchAlbum(title)),
+AppSearch.propTypes = {
+  results: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  results: state.rootReducer.results,
 });
 
-export default connect(null, mapDispatchToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  fetchAlbumByTitle: (title) => dispatch(fetchAlbumByTitle(title)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppSearch);
