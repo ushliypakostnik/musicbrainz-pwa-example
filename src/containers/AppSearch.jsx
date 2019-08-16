@@ -15,9 +15,11 @@ import GUIDELINE,
 
 import { Input } from 'antd';
 import { Alert } from 'antd';
+import { Spin } from 'antd';
 import '../css/input.css';
 import '../css/button.css';
 import '../css/alert.css';
+import '../css/spin.css';
 import '../css/customization.css';
 
 import AlbumCard from '../components/AlbumCard';
@@ -31,11 +33,13 @@ class AppSearch extends Component {
     this.state = {
       once: false,
       results: [],
+      isFetching: false,
     };
   }
 
   static getDerivedStateFromProps = (nextProps, prevState) => ({
     results: nextProps.results,
+    isFetching: nextProps.isFetching,
   });
 
   onClose = () => {
@@ -45,7 +49,7 @@ class AppSearch extends Component {
   };
 
   render() {
-    const { once, results } = this.state;
+    const { once, results, isFetching } = this.state;
 
     return (
       <Fragment>
@@ -59,28 +63,29 @@ class AppSearch extends Component {
                 this.setState({
                   once: true,
                 });
-                this.props.fetchAlbumByTitle(title)
+                this.props.fetchAlbumByTitle(title);
               }}
             />
           </Container>
         </PageHeader>
         <PageContent>
           <Container>
-            {results.length === 0 && once ?
-              <Alert
-                description={ ALERTS.search1 }
-                type="error"
-                closable
-                onClose={ this.onClose }
-              /> :
-              results.map((album, index) => {
-                return (
-                  <AlbumCard
-                    key={ index }
-                    title={ album.title }
-                  />
-                );
-              })
+            {isFetching ?
+              <Spin size="large" /> :
+              results.length === 0 && once ?
+                <Alert
+                  description={ ALERTS.search1 }
+                  type="error"
+                  closable
+                  onClose={ this.onClose }
+                /> :
+                results.map((album, index) => {
+                  return (
+                    <AlbumCard {...album}
+                      key={ index }
+                    />
+                  );
+                })
             }
           </Container>
         </PageContent>
@@ -95,6 +100,7 @@ AppSearch.propTypes = {
 
 const mapStateToProps = (state) => ({
   results: state.rootReducer.results,
+  isFetching: state.rootReducer.isFetching,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -8,10 +8,10 @@ import GUIDELINE,
 import { Button } from 'antd';
 import '../css/button.css';
 
-const AlbumCard = ({title}) => {
+const AlbumCard = props => {
   return (
     <Card>
-      <h3>{ title }</h3>
+      <h3>{ props.id }</h3>
       <Button
         type="primary"
         size="large">
