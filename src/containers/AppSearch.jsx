@@ -1,17 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 
 import { ALERTS } from '../store/constants';
 import { fetchAlbumByTitle } from '../store/actions';
 
-import GUIDELINE,
-  {
-    Container,
-    PageHeader,
-    PageContent
-  } from '../guideline';
+import {
+  Container,
+  PageHeader,
+  PageContent
+} from '../guideline';
 
 import { Input } from 'antd';
 import { Alert } from 'antd';
@@ -22,7 +20,7 @@ import '../css/alert.css';
 import '../css/spin.css';
 import '../css/customization.css';
 
-import AlbumCard from '../components/AlbumCard';
+import AlbumCard from './AlbumCard';
 
 const { Search } = Input;
 
@@ -46,6 +44,10 @@ class AppSearch extends Component {
     this.setState({
       once: false,
     });
+  };
+
+  getArtistName = (album) => {
+    return album['artist-credit'][0].name;
   };
 
   render() {
@@ -83,6 +85,7 @@ class AppSearch extends Component {
                   return (
                     <AlbumCard {...album}
                       key={ index }
+                      artist={ this.getArtistName(album) }
                     />
                   );
                 })

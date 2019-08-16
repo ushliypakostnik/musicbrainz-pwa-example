@@ -6,16 +6,16 @@ const rootReducer = (state, action) => {
   }
 
   switch (action.type) {
-    case "REQUEST_ALBUM":
+    case 'REQUEST_ALBUM':
       return Object.assign({}, state, {
         isFetching: true,
       });
-    case "RECEIVE_ALBUM":
+    case 'RECEIVE_ALBUM':
       return Object.assign({}, state, {
         isFetching: false,
         results: action.albums,
       });
-    case "REQUEST_ALBUM_FAILED":
+    case 'REQUEST_ALBUM_FAILED':
       return Object.assign({}, state, {
         isFetching: false,
         error: action.error,

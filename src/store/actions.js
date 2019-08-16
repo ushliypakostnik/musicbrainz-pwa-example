@@ -29,7 +29,6 @@ export const fetchAlbumByTitle = (title) => {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result.releases);
           dispatch(receiveAlbum(result.releases));
         },
         (error) => {
