@@ -14,19 +14,25 @@ import AppSearch from './AppSearch';
 import AppCollection from './AppCollection';
 
 const AppWrapper = styled.div`
-  min-height: 100vh;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-top: calc(${GUIDELINE.header_height}px + ${GUIDELINE.subheader_height}px + ${GUIDELINE.gutter}px + 1px);
 `
 
 const AppHeader = styled.div`
-  position: relative;
-  background-color: ${GUIDELINE.color_dark};
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: ${GUIDELINE.header_height}px;
+  background-color: ${GUIDELINE.color_white};
   display: flex;
   align-items: flex-start;
-  box-shadow: ${GUIDELINE.shadow_offset_x} ${GUIDELINE.shadow_offset_y} ${GUIDELINE.shadow_size} ${GUIDELINE.shadow_spread} ${GUIDELINE.color_shadow};
+  border-bottom: 1px solid ${GUIDELINE.color_border};
+  z-index: ${GUIDELINE.layout_front};
 `
 
 const AppPage = styled.div`

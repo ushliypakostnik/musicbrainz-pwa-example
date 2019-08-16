@@ -8,3 +8,7 @@
 .collection-form .ant-btn {
   margin-left: 10px;
 }
+
+.ant-alert-close-icon:focus {
+  outline: none !important;
+}

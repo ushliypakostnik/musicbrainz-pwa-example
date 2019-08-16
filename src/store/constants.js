@@ -20,3 +20,7 @@ export const PAGES = [
     title: 'Collection',
   }
 ];
+
+export const ALERTS = {
+  search1: 'No albums found',
+};

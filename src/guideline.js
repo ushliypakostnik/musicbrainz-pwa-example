@@ -5,16 +5,11 @@ const lineHeightStandart = 1.428571429;
 const GUIDELINE = {
   // Sizes and layouts
   gutter: 20,
+  header_height: 48,
+  subheader_height: 80,
+  layout_front: 900,
 
   // Media breackpoints
-  breackpoint_mg: '1700px',
-  breackpoint_xl_max: '1699px',
-  breackpoint_xl: '1400px',
-  breackpoint_lg_max: '1399px',
-  breackpoint_lg: '1250px',
-  breackpoint_md_max: '1249px',
-  breackpoint_md: '1050px',
-  breackpoint_sm_max: '1049px',
   breackpoint_sm: '761px',
   breackpoint_xs_max: '760px',
   breackpoint_xs: '460px',
@@ -144,14 +139,27 @@ export const Container = styled.div`
 `
 
 export const PageHeader = styled.header`
+  position: fixed;
+  top: ${GUIDELINE.header_height}px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: calc(${GUIDELINE.layout_front} - 50);
   background-color: ${GUIDELINE.color_light};
   padding-top: ${GUIDELINE.gutter}px;
   padding-bottom: ${GUIDELINE.gutter}px;
-  border-bottom: 1px solid ${GUIDELINE.color_border};
+  box-shadow: ${GUIDELINE.shadow_offset_x} ${GUIDELINE.shadow_offset_y} ${GUIDELINE.shadow_size} ${GUIDELINE.shadow_spread} ${GUIDELINE.color_shadow};
 `
 
 export const PageContent = styled.main`
   background-color: ${GUIDELINE.color_white};
+`
+export const Card = styled.div`
+  margin-bottom: ${GUIDELINE.gutter}px;
+  padding: calc(${GUIDELINE.gutter}px / 2) ${GUIDELINE.gutter}px;
+  text-align: left;
+  border: 1px solid ${GUIDELINE.color_border}
+  box-shadow: ${GUIDELINE.shadow_offset_x} ${GUIDELINE.shadow_offset_y} calc(${GUIDELINE.shadow_size} / 2) calc(${GUIDELINE.shadow_spread} * 2) ${GUIDELINE.color_shadow};
 `
 
 export default GUIDELINE;
