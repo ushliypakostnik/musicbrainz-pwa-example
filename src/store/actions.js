@@ -6,6 +6,9 @@ export const REQUEST_ALBUM = 'REQUEST_ALBUM';
 export const RECEIVE_ALBUM = 'RECEIVE_ALBUM';
 export const REQUEST_ALBUM_FAILED = 'REQUEST_ALBUM_FAILED';
 
+export const ADD_ALBUM = 'ADD_ALBUM';
+export const REMOVE_ALBUM = 'REMOVE_ALBUM';
+
 // Action Creators
 
 export const requestAlbum = () => ({
@@ -38,3 +41,14 @@ export const fetchAlbumByTitle = (title) => {
       );
   }
 };
+
+export const addAlbum = (album) => ({
+  type: ADD_ALBUM,
+  album,
+});
+
+export const removeAlbum = (album) => ({
+  type: REMOVE_ALBUM,
+  album,
+});
+

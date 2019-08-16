@@ -20,6 +20,23 @@ const rootReducer = (state, action) => {
         isFetching: false,
         error: action.error,
       });
+    case 'ADD_ALBUM':
+      const indexTest = state.collectionId.indexOf(action.album.id);
+      if (indexTest === -1) {
+        const collectionAdd = state.collection.concat(action.album);
+        const collectionIdAdd = state.collectionId.concat(action.album.id);
+        return Object.assign({}, state, {
+          collection: collectionAdd,
+          collectionId: collectionIdAdd,
+        });
+      }
+      return state;
+    case 'REMOVE_ALBUM':
+      const index = state.collection.indexOf(action.album);
+      const collectionRemove = state.collection.splice(index, 1);
+      return Object.assign({}, state, {
+        collection: collectionRemove,
+      });
     default:
       return state;
   }

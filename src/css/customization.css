@@ -12,3 +12,49 @@
 .ant-alert-close-icon:focus {
   outline: none !important;
 }
+
+.ant-spin {
+  padding-top: 40px;
+}
+
+.ant-table-content {
+  padding-bottom: 75px;
+}
+
+.ant-pagination.ant-table-pagination {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: #fafafa;
+  margin: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid #eff2f5;
+}
+
+@media (max-width: 799px) {
+  .ant-pagination-prev .ant-pagination-item-link,
+  .ant-pagination-next .ant-pagination-item-link {
+    background: #fafafa;
+  }
+}
+
+@media (min-width: 800px) {
+  .table--desktop {
+    display: block;
+  }
+  .table--mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 799px) {
+  .table--desktop {
+    display: none;
+  }
+  .table--mobile {
+    display: block;
+  }
+}

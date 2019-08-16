@@ -18,7 +18,7 @@ const AppWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: calc(${GUIDELINE.header_height}px + ${GUIDELINE.subheader_height}px + ${GUIDELINE.gutter}px + 1px);
+  padding-top: calc(${GUIDELINE.header_height}px + ${GUIDELINE.subheader_height}px + 1px);
 `
 
 const AppHeader = styled.div`
@@ -59,8 +59,13 @@ const MenuItem = styled.li`
   }
 
   ${Link} {
+    font-family: ${GUIDELINE.fontfamily_sans};
+    font-size:  ${GUIDELINE.fontsize_large}px;
+    font-weight: ${GUIDELINE.fontweight_sans_regular};
+    line-height:  ${GUIDELINE.lineheight_normal}px;
+    letter-spacing: ${GUIDELINE.letterspacing_normal};
+    white-space: nowrap;
     text-transform: uppercase;
-    font-size: ${GUIDELINE.fontsize_large}px;
 
     @media (max-width: ${GUIDELINE.breackpoint_xs_max}) {
       font-size: ${GUIDELINE.fontsize_small}px;

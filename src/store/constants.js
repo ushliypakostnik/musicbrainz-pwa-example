@@ -2,11 +2,13 @@ export const INITIAL_STATE = {
   rootReducer: {
     isFetching: false,
     results: [],
+    collection: [],
+    collectionId: [],
   },
   routing: {}
 };
 
-export const FETCH_ALBUM_BY_TITLE_URL = 'http://musicbrainz.org/ws/2/release/?query=type:album AND ';
+export const FETCH_ALBUM_BY_TITLE_URL = 'http://musicbrainz.org/ws/2/release/?limit=100&query=type:album AND ';
 
 export const PAGES = [
   {

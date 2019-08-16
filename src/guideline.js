@@ -20,6 +20,8 @@ const GUIDELINE = {
   color_black: '#000000',
   color_light: '#fafafa',
   color_text: '#6c7a89',
+  color_text_light: 'rgba(108, 122, 137, 0.75)',
+  color_link: '#1890ff',
   color_border: '#eff2f5',
   color_shadow: 'rgba(0, 0, 0, 0.15)',
 
@@ -45,8 +47,7 @@ const GUIDELINE = {
 }
 
 Object.assign(GUIDELINE, {
-  color_link: GUIDELINE.color_text,
-  color_link_hover: GUIDELINE.color_text,
+  color_link_hover: GUIDELINE.color_link,
   color_placeholder: GUIDELINE.color_border,
 
   // Good line height for all font sizes
@@ -154,12 +155,8 @@ export const PageHeader = styled.header`
 export const PageContent = styled.main`
   background-color: ${GUIDELINE.color_white};
 `
-export const Card = styled.div`
-  margin-bottom: ${GUIDELINE.gutter}px;
-  padding: calc(${GUIDELINE.gutter}px / 2) ${GUIDELINE.gutter}px;
-  text-align: left;
-  border: 1px solid ${GUIDELINE.color_border}
-  box-shadow: ${GUIDELINE.shadow_offset_x} ${GUIDELINE.shadow_offset_y} calc(${GUIDELINE.shadow_size} / 2) calc(${GUIDELINE.shadow_spread} * 2) ${GUIDELINE.color_shadow};
+export const AlertWrapper= styled.div`
+  padding: ${GUIDELINE.gutter}px;
 `
 
 export default GUIDELINE;
