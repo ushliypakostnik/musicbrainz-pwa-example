@@ -21,13 +21,14 @@ const rootReducer = (state, action) => {
         error: action.error,
       });
     case 'ADD_ALBUM':
-      const indexTest = state.collectionId.indexOf(action.album.id);
-      if (indexTest === -1) {
-        const collectionAdd = state.collection.concat(action.album);
-        const collectionIdAdd = state.collectionId.concat(action.album.id);
+      if (state.collection.collectionId.indexOf(action.album.id) === -1) {
+        const collectionIdAdd = state.collection.collectionId.concat(action.album.id);
+        const collectionAdd = state.collection.collection.concat(action.album);
         return Object.assign({}, state, {
-          collection: collectionAdd,
-          collectionId: collectionIdAdd,
+          collection: {
+            collectionId: collectionIdAdd,
+            collection: collectionAdd,
+          },
         });
       }
       return state;

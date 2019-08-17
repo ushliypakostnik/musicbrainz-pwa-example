@@ -2,8 +2,10 @@ export const INITIAL_STATE = {
   rootReducer: {
     isFetching: false,
     results: [],
-    collection: [],
-    collectionId: [],
+    collection: {
+      collectionId: [],
+      collection: [],
+    },
   },
   routing: {}
 };

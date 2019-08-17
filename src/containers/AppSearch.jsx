@@ -232,7 +232,7 @@ AppSearch.propTypes = {
 
 const mapStateToProps = (state) => ({
   results: state.rootReducer.results,
-  collectionId: state.rootReducer.collectionId,
+  collectionId: state.rootReducer.collection.collectionId,
   isFetching: state.rootReducer.isFetching,
 });
 

@@ -180,8 +180,8 @@ AppCollection.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  collection: state.rootReducer.collection,
-  collectionId: state.rootReducer.collectionId,
+  collection: state.rootReducer.collection.collection,
+  collectionId: state.rootReducer.collection.collectionId,
   isFetching: state.rootReducer.isFetching,
 });
 
