@@ -33,10 +33,24 @@ const rootReducer = (state, action) => {
       }
       return state;
     case 'REMOVE_ALBUM':
-      const index = state.collection.indexOf(action.album);
-      const collectionRemove = state.collection.splice(index, 1);
+      const index1 = state.collection.collectionId.indexOf(action.album.id);
+      let index2;
+      const collectionRemoveGetIndex = state.collection.collection.map((album, index) => {
+        if (album.id === action.album.id) index2 = index;
+      });
+      console.log('Индекс1: ', index1);
+      console.log('Индекс2: ', index2);
+      const collectionIdRemove = state.collection.collectionId;
+      collectionIdRemove.splice(index1, 1);
+      const collectionRemove = state.collection.collection;
+      collectionRemove.splice(index2, 1);
+      console.log('collectionIdRemove: ', collectionIdRemove);
+      console.log('collectionRemove: ', collectionRemove);
       return Object.assign({}, state, {
-        collection: collectionRemove,
+        collection: {
+          collectionId: collectionIdRemove,
+          collection: collectionRemove,
+        },
       });
     default:
       return state;

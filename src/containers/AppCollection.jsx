@@ -24,24 +24,26 @@ class AppCollection extends Component {
 
     this.state = {
       collection: [],
-      collectionId: [],
       isFetching: false,
     };
   }
 
   static getDerivedStateFromProps = (nextProps, prevState) => ({
     collection: nextProps.collection,
-    collectionId: nextProps.collectionId,
     isFetching: nextProps.isFetching,
   });
 
   removeAlbum = (album) => {
     console.log('Remove album: ', album);
     this.props.removeAlbum(album);
+    this.setState({
+      collection: this.state.collection,
+    });
   };
 
   render() {
     const { collection } = this.state;
+    console.log('Collection now: ', collection);
 
     const columnsDesktop = [
       {
@@ -176,13 +178,11 @@ class AppCollection extends Component {
 
 AppCollection.propTypes = {
   collection: PropTypes.array.isRequired,
-  collectionId: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   collection: state.rootReducer.collection.collection,
-  collectionId: state.rootReducer.collection.collectionId,
   isFetching: state.rootReducer.isFetching,
 });
 
