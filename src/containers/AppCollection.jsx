@@ -37,6 +37,7 @@ class AppCollection extends Component {
 
   removeAlbum = (album) => {
     console.log('Remove album: ', album);
+    this.props.removeAlbum(album);
   };
 
   render() {
