@@ -22,8 +22,10 @@ const rootReducer = (state, action) => {
       });
     case 'ADD_ALBUM':
       if (state.collection.collectionId.indexOf(action.album.id) === -1) {
-        const collectionIdAdd = state.collection.collectionId.concat(action.album.id);
-        const collectionAdd = state.collection.collection.concat(action.album);
+        state.collection.collectionId.unshift(action.album.id);
+        const collectionIdAdd = state.collection.collectionId;
+        state.collection.collection.unshift(action.album);
+        const collectionAdd = state.collection.collection;
         return Object.assign({}, state, {
           collection: {
             collectionId: collectionIdAdd,
@@ -33,19 +35,15 @@ const rootReducer = (state, action) => {
       }
       return state;
     case 'REMOVE_ALBUM':
-      const index1 = state.collection.collectionId.indexOf(action.album.id);
+      const index1 = state.collection.collectionId.indexOf(action.albumId);
       let index2;
       const collectionRemoveGetIndex = state.collection.collection.map((album, index) => {
-        if (album.id === action.album.id) index2 = index;
+        if (album.id === action.albumId) index2 = index;
       });
-      console.log('Индекс1: ', index1);
-      console.log('Индекс2: ', index2);
       const collectionIdRemove = state.collection.collectionId;
       collectionIdRemove.splice(index1, 1);
       const collectionRemove = state.collection.collection;
       collectionRemove.splice(index2, 1);
-      console.log('collectionIdRemove: ', collectionIdRemove);
-      console.log('collectionRemove: ', collectionRemove);
       return Object.assign({}, state, {
         collection: {
           collectionId: collectionIdRemove,

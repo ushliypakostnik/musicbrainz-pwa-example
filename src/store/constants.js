@@ -26,5 +26,16 @@ export const PAGES = [
 ];
 
 export const ALERTS = {
-  search1: 'No albums found',
+  searchError: {
+    type: 'error',
+    message: 'No albums with this name found.',
+  },
+  collectionRemoveError: {
+    type: 'error',
+    message: 'There is no such album in the collection.',
+  },
+  collectionRemoveSuccess: {
+    type: 'success',
+    message: 'Album with this id removed from collection.',
+  },
 };

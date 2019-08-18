@@ -44,7 +44,7 @@ class AppSearch extends Component {
     isFetching: nextProps.isFetching,
   });
 
-  onClose = () => {
+  onAlertClose = () => {
     this.setState({
       once: false,
     });
@@ -59,30 +59,21 @@ class AppSearch extends Component {
   };
 
   isAlbumAdded = (album) => {
-    if (this.state.collectionId.indexOf(album.id) != -1) return true;
+    if (this.state.collectionId.indexOf(album.id) !== -1) return true;
     return false;
   };
 
   addAlbum = (album) => {
     if (!this.isAlbumAdded(album)) {
       this.props.addAlbum(album);
+      this.setState({
+        results: this.state.results,
+      });
     }
   };
 
   render() {
     const { once, results, isFetching } = this.state;
-
-    /* const test = [
-      {
-        key: 'key',
-        id: '1234567890',
-        name: 'Bleach',
-        artist: 'Nirvana',
-        date: '1989-06-01',
-        country: 'US',
-        format: 'CD',
-      },
-    ]; */
 
     const columnsDesktop = [
       {
@@ -153,7 +144,7 @@ class AppSearch extends Component {
 
     const dataDesktop = results.map((album, index) => {
       return {
-        key: String(index),
+        key: album.id,
         id: album.id,
         name: album.title,
         artist: this.getArtistName(album),
@@ -164,7 +155,7 @@ class AppSearch extends Component {
     });
     const dataMobile = results.map((album, index) => {
       return {
-        key: String(index),
+        key: album.id,
         id: album.id,
         name: album.title,
         artist: this.getArtistName(album),
@@ -197,10 +188,10 @@ class AppSearch extends Component {
             results.length === 0 && once ?
               <AlertWrapper>
                 <Alert
-                  description={ ALERTS.search1 }
-                  type="error"
+                  type={ ALERTS.searchError.type }
+                  description={ ALERTS.searchError.message }
                   closable
-                  onClose={ this.onClose }
+                  onClose={ this.onAlertClose }
                 />
               </AlertWrapper> :
               <Fragment>

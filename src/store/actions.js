@@ -47,8 +47,8 @@ export const addAlbum = (album) => ({
   album,
 });
 
-export const removeAlbum = (album) => ({
+export const removeAlbum = (albumId) => ({
   type: REMOVE_ALBUM,
-  album,
+  albumId,
 });
 
