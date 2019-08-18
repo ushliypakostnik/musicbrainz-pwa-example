@@ -2,7 +2,11 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { ALERTS } from '../store/constants';
+import {
+  DEFAULT_PAGE_SIZE,
+  ALERTS,
+} from '../store/constants';
+
 import {
   fetchAlbumById,
   removeAlbum,
@@ -185,8 +189,8 @@ class AppCollection extends Component {
       };
     });
 
-    const paginationDesktop = { defaultPageSize: 20 };
-    const paginationMobile = { defaultPageSize: 20, simple: true };
+    const paginationDesktop = { defaultPageSize: DEFAULT_PAGE_SIZE };
+    const paginationMobile = { defaultPageSize: DEFAULT_PAGE_SIZE, simple: true };
 
     return (
       <Fragment>
