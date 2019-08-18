@@ -11,9 +11,9 @@ export const INITIAL_STATE = {
   routing: {}
 };
 
-export const FETCH_ALBUM_BY_TITLE_URL = 'http://musicbrainz.org/ws/2/release/?limit=100&query=type:album AND ';
+export const FETCH_ALBUM_BY_TITLE_URL = 'https://musicbrainz.org/ws/2/release/?limit=100&query=type:album AND ';
 export const FETCH_ALBUM_BY_TITLE_QUERY = '&fmt=json';
-export const FETCH_ALBUM_BY_ID_URL =  'http://musicbrainz.org/ws/2/release/';
+export const FETCH_ALBUM_BY_ID_URL =  'https://musicbrainz.org/ws/2/release/';
 export const FETCH_ALBUM_BY_ID_QUERY =  '?inc=artist-credits+labels+discids+recordings&fmt=json';
 
 export const PAGES = [
