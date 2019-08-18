@@ -172,6 +172,7 @@ class AppSearch extends Component {
         <PageHeader>
           <Container>
             <Search
+              type="text"
               placeholder="Search album on Musicbrainz"
               enterButton="Search"
               size="large"
