@@ -52,7 +52,7 @@ const MenuItem = styled.li`
     margin-right: calc(${GUIDELINE.gutter}px * 4);
   }
 
-  @media (max-width: ${GUIDELINE.breackpoint_xs_max}) {
+  @media (max-width: ${GUIDELINE.breackpoint_xs_max}px) {
     &:not(:last-child) {
       margin-right: calc(${GUIDELINE.gutter}px * 2);
     }
@@ -67,7 +67,7 @@ const MenuItem = styled.li`
     white-space: nowrap;
     text-transform: uppercase;
 
-    @media (max-width: ${GUIDELINE.breackpoint_xs_max}) {
+    @media (max-width: ${GUIDELINE.breackpoint_xs_max}px) {
       font-size: ${GUIDELINE.fontsize_small}px;
     }
   }

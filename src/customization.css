@@ -1,5 +1,16 @@
-/* Customization */
+/* Customization AntD library */
 /* ////////////////////////////////////////////////////// */
+
+.ant-btn-link {
+  display: inline;
+  padding: 0;
+  border: none;
+  line-height: 21px;
+}
+
+.ant-btn.ant-btn-link {
+  height: auto;
+}
 
 .collection-form {
   display: flex;
@@ -41,7 +52,7 @@
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 751px) {
   .table--desktop {
     display: block;
   }
@@ -50,11 +61,22 @@
   }
 }
 
-@media (max-width: 799px) {
+@media (max-width: 750px) {
   .table--desktop {
     display: none;
   }
   .table--mobile {
     display: block;
+  }
+}
+
+.ant-alert-message {
+  margin-bottom: 0;
+}
+
+@media (max-width: 750px) {
+  .ant-alert-with-description .ant-alert-close-icon {
+    top: 6px;
+    right: 9px;
   }
 }

@@ -15,14 +15,14 @@ import {
   AlertWrapper
 } from '../guideline';
 
-import { Input, Alert, Spin, Table, Pagination } from 'antd';
+import { Input, Button, Alert, Spin, Table, Pagination } from 'antd'; // eslint-disable-line no-unused-vars
 import '../../node_modules/antd/lib/input/style/index.css';
 import '../../node_modules/antd/lib/button/style/index.css';
 import '../../node_modules/antd/lib/alert/style/index.css';
 import '../../node_modules/antd/lib/spin/style/index.css';
 import '../../node_modules/antd/lib/table/style/index.css';
 import '../../node_modules/antd/lib/pagination/style/index.css';
-import '../css/customization.css';
+import '../customization.css';
 
 const { Search } = Input;
 
@@ -54,10 +54,6 @@ class AppSearch extends Component {
     return album['artist-credit'][0].name;
   };
 
-  getFormat = (album) => {
-    return album['media'][0].format;
-  };
-
   isAlbumAdded = (album) => {
     if (this.state.collectionId.indexOf(album.id) !== -1) return true;
     return false;
@@ -77,9 +73,9 @@ class AppSearch extends Component {
 
     const columnsDesktop = [
       {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
+        title: 'Title',
+        dataIndex: 'title',
+        key: 'title',
       },
       {
         title: 'Artist',
@@ -97,30 +93,31 @@ class AppSearch extends Component {
         key: 'country',
       },
       {
-        title: 'Format',
-        dataIndex: 'format',
-        key: 'format',
+        title: 'Status',
+        dataIndex: 'status',
+        key: 'status',
       },
       {
         title: 'Action',
         key: 'action',
         render: (record) => (
-          <a
-            href="#"
+          <Button
+            type="link"
+            aria-label="Add album"
             onClick={(e) => {
               e.preventDefault();
               this.addAlbum(record);
             }}
-          >{ !this.isAlbumAdded(record) && 'Add' }</a>
+          >{ !this.isAlbumAdded(record) && 'Add' }</Button>
         ),
       },
     ];
 
     const columnsMobile = [
       {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
+        title: 'Title',
+        dataIndex: 'title',
+        key: 'title',
       },
       {
         title: 'Artist',
@@ -131,13 +128,14 @@ class AppSearch extends Component {
         title: 'Action',
         key: 'action',
         render: (record) => (
-          <a
-            href="#"
+          <Button
+            type="link"
+            aria-label="Add album"
             onClick={(e) => {
               e.preventDefault();
               this.addAlbum(record);
             }}
-          >{ !this.isAlbumAdded(record) && 'Add' }</a>
+          >{ !this.isAlbumAdded(record) && 'Add' }</Button>
         ),
       },
     ];
@@ -146,18 +144,18 @@ class AppSearch extends Component {
       return {
         key: album.id,
         id: album.id,
-        name: album.title,
+        title: album.title,
         artist: this.getArtistName(album),
         date: album.date,
         country: album.country,
-        format: this.getFormat(album),
+        status: album.status,
       };
     });
     const dataMobile = results.map((album, index) => {
       return {
         key: album.id,
         id: album.id,
-        name: album.title,
+        title: album.title,
         artist: this.getArtistName(album),
       };
     });

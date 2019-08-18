@@ -1,10 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 
 import { ALERTS } from '../store/constants';
-import { removeAlbum } from '../store/actions';
+import {
+  fetchAlbumById,
+  removeAlbum,
+  errorClearing,
+} from '../store/actions';
 
 import {
   Container,
@@ -13,14 +16,14 @@ import {
   AlertWrapper
 } from '../guideline';
 
-import { Input, Button, Spin, Alert, Table, Pagination } from 'antd';
+import { Input, Button, Spin, Alert, Table, Pagination } from 'antd'; // eslint-disable-line no-unused-vars
 import '../../node_modules/antd/lib/input/style/index.css';
 import '../../node_modules/antd/lib/button/style/index.css';
 import '../../node_modules/antd/lib/alert/style/index.css';
 import '../../node_modules/antd/lib/spin/style/index.css';
 import '../../node_modules/antd/lib/table/style/index.css';
 import '../../node_modules/antd/lib/pagination/style/index.css';
-import '../css/customization.css';
+import '../customization.css';
 
 class AppCollection extends Component {
   constructor(props) {
@@ -31,6 +34,7 @@ class AppCollection extends Component {
       collection: [],
       isFetching: false,
       alert: [],
+      error: [],
     };
   }
 
@@ -38,12 +42,27 @@ class AppCollection extends Component {
     collectionId: nextProps.collectionId,
     collection: nextProps.collection,
     isFetching: nextProps.isFetching,
+    error: nextProps.error,
   });
 
   onAlertClose = () => {
+    this.props.errorClearing();
     this.setState({
       alert: [],
     });
+  };
+
+  addAlbumById = () => {
+    const albumId = this.albumIdInput.state.value;
+    const alert = this.state.alert;
+    if (this.state.collectionId.indexOf(albumId) === -1) {
+      this.props.fetchAlbumById(albumId);
+    } else {
+      alert.push(ALERTS.collectionAddInfoAlready);
+      this.setState({
+        alert: alert,
+      });
+    }
   };
 
   removeAlbum = (albumId) => {
@@ -67,14 +86,21 @@ class AppCollection extends Component {
     });
   };
 
+  getArtistName = (album) => {
+    if (album['artist-credit']) return album['artist-credit'][0].name;
+    return album.title;
+  };
+
   render() {
-    const { collection, isFetching, alert } = this.state;
+    const { collection, isFetching, alert, error } = this.state;
+
+    if (error.length !== 0) alert.push(ALERTS.collectionAddErrorInvalid);
 
     const columnsDesktop = [
       {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
+        title: 'Title',
+        dataIndex: 'title',
+        key: 'title',
       },
       {
         title: 'Artist',
@@ -92,30 +118,31 @@ class AppCollection extends Component {
         key: 'country',
       },
       {
-        title: 'Format',
-        dataIndex: 'format',
-        key: 'format',
+        title: 'Status',
+        dataIndex: 'status',
+        key: 'status',
       },
       {
         title: 'Action',
         key: 'action',
         render: (record) => (
-          <a
-            href="#"
+          <Button
+            type="link"
+            aria-label="Delete album"
             onClick={(e) => {
               e.preventDefault();
               this.removeAlbum(record.id);
             }}
-          >Delete</a>
+          >Delete</Button>
         ),
       },
     ];
 
     const columnsMobile = [
       {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
+        title: 'Title',
+        dataIndex: 'title',
+        key: 'title',
       },
       {
         title: 'Artist',
@@ -126,34 +153,35 @@ class AppCollection extends Component {
         title: 'Action',
         key: 'action',
         render: (record) => (
-          <a
-            href="#"
+          <Button
+            type="link"
+            aria-label="Delete album"
             onClick={(e) => {
               e.preventDefault();
               this.removeAlbum(record.id);
             }}
-          >Delete</a>
+          >Delete</Button>
         ),
       },
     ];
 
     const dataDesktop = collection.map((album, index) => {
       return {
-        key: album.key,
+        key: album.id,
         id: album.id,
-        name: album.name,
-        artist: album.artist,
+        title: album.title,
+        artist: this.getArtistName(album),
         date: album.date,
         country: album.country,
-        format: album.format,
+        status: album.status,
       };
     });
     const dataMobile = collection.map((album, index) => {
       return {
-        key: album.key,
+        key: album.id,
         id: album.id,
-        name: album.name,
-        artist: album.artist,
+        title: album.title,
+        artist: this.getArtistName(album),
       };
     });
 
@@ -174,6 +202,10 @@ class AppCollection extends Component {
               <Button
                 type="primary"
                 size="large"
+                onClick={(e) => {
+                  e.preventDefault();
+                  this.addAlbumById();
+                }}
               >
                 Add
               </Button>
@@ -227,17 +259,20 @@ AppCollection.propTypes = {
   collectionId: PropTypes.array.isRequired,
   collection: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
+  error: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   collectionId: state.rootReducer.collection.collectionId,
   collection: state.rootReducer.collection.collection,
   isFetching: state.rootReducer.isFetching,
+  error: state.rootReducer.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // fetchAlbumById: (id) => dispatch(fetchAlbumByid(id)),
+  fetchAlbumById: (albumId) => dispatch(fetchAlbumById(albumId)),
   removeAlbum: (albumId) => dispatch(removeAlbum(albumId)),
+  errorClearing: () => dispatch(errorClearing()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppCollection);

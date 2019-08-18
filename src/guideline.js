@@ -10,10 +10,7 @@ const GUIDELINE = {
   layout_front: 900,
 
   // Media breackpoints
-  breackpoint_sm: '761px',
-  breackpoint_xs_max: '760px',
-  breackpoint_xs: '460px',
-  breackpoint_min: '320px',
+  breackpoint_xs_max: 750,
 
   // Colors
   color_white: '#ffffff',
@@ -34,10 +31,6 @@ const GUIDELINE = {
   fontsize_large: 20,
   fontsize_normal: 16,
   fontsize_small: 14,
-
-  // Effects
-  transition_duration: '0.2s',
-  transition_timingfunction: 'linear',
 
   // Shadows
   shadow_offset_x: '0',

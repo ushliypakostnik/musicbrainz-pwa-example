@@ -6,16 +6,16 @@ const rootReducer = (state, action) => {
   }
 
   switch (action.type) {
-    case 'REQUEST_ALBUM':
+    case 'REQUEST_ALBUM_BY_TITLE':
       return Object.assign({}, state, {
         isFetching: true,
       });
-    case 'RECEIVE_ALBUM':
+    case 'RECEIVE_ALBUM_BY_TITLE':
       return Object.assign({}, state, {
         isFetching: false,
         results: action.albums,
       });
-    case 'REQUEST_ALBUM_FAILED':
+    case 'REQUEST_ALBUM_BY_TITLE_FAILED':
       return Object.assign({}, state, {
         isFetching: false,
         error: action.error,
@@ -26,6 +26,7 @@ const rootReducer = (state, action) => {
         const collectionIdAdd = state.collection.collectionId;
         state.collection.collection.unshift(action.album);
         const collectionAdd = state.collection.collection;
+
         return Object.assign({}, state, {
           collection: {
             collectionId: collectionIdAdd,
@@ -37,19 +38,50 @@ const rootReducer = (state, action) => {
     case 'REMOVE_ALBUM':
       const index1 = state.collection.collectionId.indexOf(action.albumId);
       let index2;
+      // eslint-disable-next-line no-unused-vars
       const collectionRemoveGetIndex = state.collection.collection.map((album, index) => {
         if (album.id === action.albumId) index2 = index;
+        return album;
       });
       const collectionIdRemove = state.collection.collectionId;
       collectionIdRemove.splice(index1, 1);
       const collectionRemove = state.collection.collection;
       collectionRemove.splice(index2, 1);
+
       return Object.assign({}, state, {
         collection: {
           collectionId: collectionIdRemove,
           collection: collectionRemove,
         },
       });
+      case 'REQUEST_ALBUM_BY_ID':
+        return Object.assign({}, state, {
+          isFetching: true,
+        });
+      case 'RECEIVE_ALBUM_BY_ID':
+        state.collection.collectionId.unshift(action.album.id);
+        const collectionIdAdd = state.collection.collectionId;
+        state.collection.collection.unshift(action.album);
+        const collectionAdd = state.collection.collection;
+
+        return Object.assign({}, state, {
+          isFetching: false,
+          collection: {
+            collectionId: collectionIdAdd,
+            collection: collectionAdd,
+          },
+        });
+      case 'REQUEST_ALBUM_BY_ID_FAILED':
+        const error = [];
+        error.push(action.error);
+        return Object.assign({}, state, {
+          isFetching: false,
+          error,
+        });
+      case 'ERROR_CLEARING':
+        return Object.assign({}, state, {
+          error: [],
+        });
     default:
       return state;
   }
