@@ -28,17 +28,17 @@ const localStorageMiddleware = ({getState}) => {
 middlewares.push(localStorageMiddleware);
 
 const reHydrateStore = (state) => {
-  let localCollection;
   if (localStorage.getItem('localCollection') !== null) {
-    localCollection = JSON.parse(localStorage.getItem('localCollection'));
+    const localCollection = JSON.parse(localStorage.getItem('localCollection'));
+    const _state = Object.assign({}, state, {
+        rootReducer: {
+          ...state.rootReducer,
+          collection: localCollection,
+        },
+    });
+    return _state;
   }
-  const _state = Object.assign({}, state, {
-      rootReducer: {
-        ...state.rootReducer,
-        collection: localCollection,
-      },
-  });
-  return _state;
+  return state;
 };
 
 function configureStore(state) {

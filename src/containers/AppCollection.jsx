@@ -12,10 +12,10 @@ import {
 } from '../guideline';
 
 import { Input, Button, Table, Pagination } from 'antd';
-import '../css/input.css';
-import '../css/button.css';
-import '../css/table.css';
-import '../css/pagination.css';
+import '../../node_modules/antd/lib/input/style/index.css';
+import '../../node_modules/antd/lib/button/style/index.css';
+import '../../node_modules/antd/lib/table/style/index.css';
+import '../../node_modules/antd/lib/pagination/style/index.css';
 import '../css/customization.css';
 
 class AppCollection extends Component {
