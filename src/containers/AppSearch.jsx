@@ -10,6 +10,7 @@ import {
 import {
   fetchAlbumByTitle,
   addAlbum,
+  removeAlbum,
 } from '../store/actions';
 
 import {
@@ -64,12 +65,17 @@ class AppSearch extends Component {
   };
 
   addAlbum = (album) => {
-    if (!this.isAlbumAdded(album)) {
-      this.props.addAlbum(album);
-      this.setState({
-        results: this.state.results,
-      });
-    }
+    this.props.addAlbum(album);
+    this.setState({
+      results: this.state.results,
+    });
+  };
+
+  removeAlbum = (albumId) => {
+    this.props.removeAlbum(albumId);
+    this.setState({
+      collection: this.state.collection,
+    });
   };
 
   render() {
@@ -110,9 +116,9 @@ class AppSearch extends Component {
             aria-label="Add album"
             onClick={(e) => {
               e.preventDefault();
-              this.addAlbum(record);
+              !this.isAlbumAdded(record) ? this.addAlbum(record) : this.removeAlbum(record.id);
             }}
-          >{ !this.isAlbumAdded(record) && 'Add' }</Button>
+          >{ !this.isAlbumAdded(record) ? 'Add' : 'Delete' }</Button>
         ),
       },
     ];
@@ -137,9 +143,9 @@ class AppSearch extends Component {
             aria-label="Add album"
             onClick={(e) => {
               e.preventDefault();
-              this.addAlbum(record);
+              !this.isAlbumAdded(record) ? this.addAlbum(record) : this.removeAlbum(record.id);
             }}
-          >{ !this.isAlbumAdded(record) && 'Add' }</Button>
+          >{ !this.isAlbumAdded(record) ? 'Add' : 'Delete' }</Button>
         ),
       },
     ];
@@ -233,6 +239,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchAlbumByTitle: (title) => dispatch(fetchAlbumByTitle(title)),
   addAlbum: (album) => dispatch(addAlbum(album)),
+  removeAlbum: (albumId) => dispatch(removeAlbum(albumId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppSearch);
