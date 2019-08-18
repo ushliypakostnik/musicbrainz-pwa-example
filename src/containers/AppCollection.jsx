@@ -39,6 +39,7 @@ class AppCollection extends Component {
       isFetching: false,
       alert: [],
       error: [],
+      buttons: false,
     };
   }
 
@@ -92,11 +93,11 @@ class AppCollection extends Component {
 
   getArtistName = (album) => {
     if (album['artist-credit']) return album['artist-credit'][0].name;
-    return album.title;
+    return album.artist;
   };
 
   render() {
-    const { collection, isFetching, alert, error } = this.state;
+    const { collection, isFetching, alert, error, buttons } = this.state;
 
     if (error.length !== 0) alert.push(ALERTS.collectionAddErrorInvalid);
 
@@ -202,10 +203,22 @@ class AppCollection extends Component {
                 ref={element => this.albumIdInput = element}
                 size="large"
                 placeholder="Album ID"
+                onChange={(e) => {
+                  if (e.target.value === '') {
+                    this.setState({
+                      buttons: false,
+                    });
+                  } else {
+                    this.setState({
+                      buttons: true,
+                    });
+                  }
+                }}
               />
               <Button
                 type="primary"
                 size="large"
+                disabled={ !buttons }
                 onClick={(e) => {
                   e.preventDefault();
                   this.addAlbumById();
@@ -216,6 +229,7 @@ class AppCollection extends Component {
               <Button
                 type="danger"
                 size="large"
+                disabled={ !buttons }
                 onClick={(e) => {
                   e.preventDefault();
                   this.removeAlbumById();
